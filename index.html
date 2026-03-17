@@ -1,0 +1,221 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Veknmo - Phasmophobia Ghost Speed Tool</title>
+
+    <!-- SEO Meta Tags -->
+    <meta name="description"
+        content="Calculate ghost speed, track BPM, and simulate ghost footsteps with Veknmo - the ultimate companion tool for Phasmophobia players.">
+    <meta name="keywords"
+        content="Phasmophobia, Ghost Speed, BPM Calculator, Footstep Simulator, Phasmophobia Tool, Gaming Utility">
+    <meta name="author" content="Veknmo">
+    <meta name="robots" content="index, follow">
+
+    <!-- Open Graph / Facebook -->
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://veknmo.vercel.app/">
+    <meta property="og:title" content="Veknmo - Phasmophobia Ghost Speed Tool">
+    <meta property="og:description"
+        content="Calculate ghost speed, track BPM, and simulate ghost footsteps with Veknmo.">
+    <meta property="og:image" content="https://veknmo.vercel.app/apple-touch-icon.png">
+
+    <!-- Twitter -->
+    <meta property="twitter:card" content="summary_large_image">
+    <meta property="twitter:url" content="https://veknmo.vercel.app/">
+    <meta property="twitter:title" content="Veknmo - Phasmophobia Ghost Speed Tool">
+    <meta property="twitter:description"
+        content="Calculate ghost speed, track BPM, and simulate ghost footsteps with Veknmo.">
+    <meta property="twitter:image" content="https://veknmo.vercel.app/apple-touch-icon.png">
+
+    <!-- Icons -->
+    <link rel="icon" type="image/png" href="/favicon-96x96.png" sizes="96x96" />
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <link rel="shortcut icon" href="/favicon.ico" />
+    <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png" />
+    <link rel="manifest" href="/site.webmanifest" />
+    <meta name="theme-color" content="#1a1208">
+
+    <!-- Google Fonts for handwriting typography -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Permanent+Marker&family=Special+Elite&display=swap"
+        rel="stylesheet">
+</head>
+
+<body>
+
+    <div class="cork-board-bg"></div>
+    <div class="dust-particles"></div>
+
+    <div class="container board-layout">
+
+        <!-- Left Column: Title & Intro -->
+        <div class="left-col">
+            <div class="pinned-card hero gs-panel" style="--rotation: -2deg;">
+                <div class="tape-strip top-center"></div>
+                <h1 class="hero-title marker-font">
+                    <span class="char">V</span><span class="char">e</span><span class="char">k</span><span
+                        class="char">n</span><span class="char">m</span><span class="char">o</span>
+                </h1>
+                <p class="hero-subtitle handwritten">Ghost Speed & Footstep Simulation Board</p>
+                <!-- For GSAP errors check -->
+                <div class="scroll-indicator" style="display: none;"><span></span>
+                    <div class="line"></div>
+                </div>
+            </div>
+
+            <!-- Footstep Simulator Panel -->
+            <div class="pinned-card gs-panel" id="simulator-section" style="--rotation: 1.5deg;">
+                <div class="push-pin pin-red top-right"></div>
+                <div class="push-pin pin-red bottom-left"></div>
+
+                <div class="tooltip-wrapper">
+                    <svg class="tooltip-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+                        stroke-linecap="round" stroke-linejoin="round">
+                        <circle cx="12" cy="12" r="10"></circle>
+                        <path d="M9.09 9a3 3 0 0 1 5.83 1c0 2-3 3-3 3"></path>
+                        <line x1="12" y1="17" x2="12.01" y2="17"></line>
+                    </svg>
+                    <div class="tooltip-content handwritten">
+                        You can use this tool to simulate ghost footsteps at a specific speed. Enter the target speed
+                        (m/s) and click "Start Sim" to begin. If you are playing at 125% ghost speed modifier, set the
+                        target speed to 2.1 m/s, if the ghost steps in game are faster, you know you are dealing with a
+                        fast ghost.
+                    </div>
+                </div>
+
+                <h2 class="marker-font">Footstep Simulator</h2>
+                <div class="helper-text handwritten">
+                    1.7 m/s is regular speed.<br>(125% = 2.1, 150% = 2.5)
+                </div>
+
+                <div class="controls">
+                    <div class="input-group">
+                        <label for="simSpeed" class="handwritten">Target Speed (m/s)</label>
+                        <input type="number" id="simSpeed" value="1.7" step="0.1" min="0"
+                            class="handwritten input-handdrawn">
+                    </div>
+                </div>
+
+                <div class="btn-group">
+                    <button class="sticky-btn green handwritten" id="simulate">Start Sim</button>
+                    <button class="sticky-btn red handwritten" id="stop">Stop</button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Center Column: BPM Analyzer -->
+        <div class="center-col">
+            <div class="pinned-card main-note gs-panel" style="--rotation: -0.5deg;">
+                <div class="push-pin pin-blue top-left"></div>
+                <div class="push-pin pin-blue top-right"></div>
+                <div class="push-pin pin-blue bottom-right"></div>
+                <div class="push-pin pin-blue bottom-left"></div>
+
+                <div class="tooltip-wrapper">
+                    <svg class="tooltip-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+                        stroke-linecap="round" stroke-linejoin="round">
+                        <circle cx="12" cy="12" r="10"></circle>
+                        <path d="M9.09 9a3 3 0 0 1 5.83 1c0 2-3 3-3 3"></path>
+                        <line x1="12" y1="17" x2="12.01" y2="17"></line>
+                    </svg>
+                    <div class="tooltip-content handwritten">
+                        Select the ghost speed, then tap the spacebar every time you hear the ghost take a step. After a
+                        few taps, the tool will calculate the ghost's BPM and estimated speed. You can use this
+                        information to match with known ghost speeds.
+                    </div>
+                </div>
+
+                <h2 class="marker-font">BPM Analyzer</h2>
+                <p class="handwritten text-center note-desc">Listen for the thumps. Tap spacebar when you hear a step.
+                </p>
+
+                <div class="controls mt-4">
+                    <div class="input-group">
+                        <label for="speedModifier" class="handwritten">Contract Difficulty / Speed Modifier:</label>
+                        <select id="speedModifier" class="handwritten input-handdrawn">
+                            <option value="0">50%</option>
+                            <option value="1">75%</option>
+                            <option value="2" selected>100%</option>
+                            <option value="3">125%</option>
+                            <option value="4">150%</option>
+                        </select>
+                    </div>
+                </div>
+
+                <div class="stats-container typewriter-font">
+                    <div class="stat-box">
+                        <span class="stat-label handwritten">BPM</span>
+                        <div class="stat-val-wrap">
+                            <span class="stat-value" id="bpm">0</span>
+                        </div>
+                    </div>
+                    <div class="stat-box">
+                        <span class="stat-label handwritten">Speed (m/s)</span>
+                        <div class="stat-val-wrap">
+                            <span class="stat-value" id="speed">0</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="btn-group mt-4 justify-center">
+                    <button class="sticky-btn yellow handwritten massive-btn" id="tap">TAP ENTRY<br><span
+                            class="text-sm">(Space)</span></button>
+                    <button class="sticky-btn pink handwritten" id="reset">Clear Board</button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Right Column: Ghost List Notebook -->
+        <div class="right-col">
+            <div class="notebook-card gs-panel" style="--rotation: 1deg;">
+                <div class="tape-strip top-left" style="--tape-rot: -45deg; top: -10px; left: -20px; width: 80px;">
+                </div>
+                <div class="tape-strip bottom-right"
+                    style="--tape-rot: -45deg; bottom: -10px; right: -20px; width: 60px;"></div>
+
+                <div class="tooltip-wrapper" style="top: 1.5rem; right: 1.5rem;">
+                    <svg class="tooltip-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+                        stroke-linecap="round" stroke-linejoin="round">
+                        <circle cx="12" cy="12" r="10"></circle>
+                        <path d="M9.09 9a3 3 0 0 1 5.83 1c0 2-3 3-3 3"></path>
+                        <line x1="12" y1="17" x2="12.01" y2="17"></line>
+                    </svg>
+                    <div class="tooltip-content handwritten">
+                        This list automatically filters ghost types based on your estimated speed. It matches the
+                        estimated speed against known ghost speeds with a ±0.175m/s margin. Ghosts marked with an
+                        asterisk (*) have varying speeds depending on conditions (e.g. Line of Sight, Temperature).
+                    </div>
+                </div>
+
+                <h2 class="marker-font notebook-title">Suspects</h2>
+
+                <div class="ghost-filter-container handwritten" id="ghost-list" data-lenis-prevent>
+                    <div class="helper-text text-center mt-2">Log BPM to filter suspects.</div>
+                </div>
+            </div>
+        </div>
+
+    </div>
+
+    <!-- Background typography rows for JS backwards compatibility so it doesn't crash, but invisible -->
+    <div style="display:none;" class="row-1">_</div>
+    <div style="display:none;" class="row-2">_</div>
+    <div style="display:none;" class="row-3">_</div>
+    <div style="display:none;" class="row-4">_</div>
+
+    <!-- Scripts -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js"></script>
+    <script src="https://unpkg.com/@studio-freight/lenis@1.0.33/dist/lenis.min.js"></script>
+
+    <script type="module" src="./main.js"></script>
+    <script>
+        window.si = window.si || function () { (window.siq = window.siq || []).push(arguments); };
+    </script>
+</body>
+
+</html>

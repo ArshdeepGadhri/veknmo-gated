@@ -1,0 +1,21 @@
+{
+  "name": "veknmo",
+  "version": "1.0.0",
+  "description": "Veknmo is a beautiful, performant tool built for identifying and simulating ghost speeds in the game **Phasmophobia**. Built as a single-file static web application, it combines utility with a modern, glassmorphic dark-mode aesthetic. You can find a live working version of the tool [here](https://veknmo.vercel.app/).",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "dev": "vite",
+    "build": "vite build",
+    "preview": "vite preview"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "web-haptics": "^0.0.6"
+  },
+  "devDependencies": {
+    "vite": "^8.0.0"
+  }
+}
