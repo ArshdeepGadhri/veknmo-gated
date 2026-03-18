@@ -1,6 +1,10 @@
 import './style.css';
 import { WebHaptics } from 'web-haptics';
 import footstepAudioUrl from './assets/footstep.ogg';
+import { setupAuth } from './auth.js';
+
+const isAuthenticated = setupAuth();
+
 const haptics = new WebHaptics();
 
 // --- 1. UI Animations & Smooth Scroll ---

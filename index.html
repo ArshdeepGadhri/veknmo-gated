@@ -50,7 +50,33 @@
     <div class="cork-board-bg"></div>
     <div class="dust-particles"></div>
 
-    <div class="container board-layout">
+    <!-- User Profile (hidden until auth) -->
+    <div id="user-profile" style="position: absolute; top: 20px; right: 20px; display: none; align-items: center; gap: 10px; z-index: 100;" class="pinned-card gs-panel handwritten">
+        <img id="user-avatar" src="" style="width: 40px; height: 40px; border-radius: 50%;" alt="Discord Avatar">
+        <span id="welcome-message"></span>
+        <button id="logout-btn" class="sticky-btn red handwritten" style="padding: 5px 10px; font-size: 0.8em; margin-left: 10px;">Exit</button>
+    </div>
+
+    <!-- Login Overlay -->
+    <div id="login-overlay" class="container" style="min-height: 100vh; display: flex; align-items: center; justify-content: center; z-index: 50;">
+        <div class="pinned-card main-note gs-panel" style="--rotation: -1deg; max-width: 400px; width: 100%; text-align: center;">
+            <div class="push-pin pin-red top-center"></div>
+            <h2 class="marker-font">Access Restricted</h2>
+            <p class="handwritten mt-4">This classified board requires authorization. Run the <code>/verify</code> command in the official Discord server to receive an access code.</p>
+            
+            <div class="input-group mt-4" style="text-align: left;">
+                <label for="tokenInput" class="handwritten">Access Code</label>
+                <input type="text" id="tokenInput" placeholder="Enter your token here..." class="handwritten input-handdrawn" style="width: 100%;">
+            </div>
+            
+            <p id="login-error" class="handwritten text-center mt-2" style="color: #d92b2b; display: none;"></p>
+
+            <button class="sticky-btn yellow handwritten mt-4" id="login-btn" style="width: 100%;">Authenticate</button>
+        </div>
+    </div>
+
+    <!-- Main App Content (hidden until auth) -->
+    <div id="app-content" class="container board-layout" style="display: none;">
 
         <!-- Left Column: Title & Intro -->
         <div class="left-col">
