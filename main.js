@@ -1,7 +1,10 @@
 import './style.css';
+import { inject } from '@vercel/analytics';
 import { WebHaptics } from 'web-haptics';
 import footstepAudioUrl from './assets/footstep.ogg';
 import { setupAuth } from './auth.js';
+
+inject();
 
 const isAuthenticated = setupAuth();
 
