@@ -13,11 +13,11 @@ export function setupAuth() {
         try {
             const base64Url = token.split('.')[1];
             const base64 = base64Url.replace(/-/g, '+').replace(/_/g, '/');
-            const jsonPayload = decodeURIComponent(atob(base64).split('').map(function(c) {
+            const jsonPayload = decodeURIComponent(atob(base64).split('').map(function (c) {
                 return '%' + ('00' + c.charCodeAt(0).toString(16)).slice(-2);
             }).join(''));
             return JSON.parse(jsonPayload);
-        } catch(e) {
+        } catch (e) {
             return null;
         }
     }
@@ -55,8 +55,8 @@ export function setupAuth() {
     }
 
     function displayUser(username, userId, avatar) {
-        welcomeMessage.innerHTML = `👻 Welcome back,<br><b>${username}</b>`;
-        
+        welcomeMessage.innerHTML = `👻 Welcome back investigator,<br><b>@${username}</b>`;
+
         if (avatar) {
             let ext = avatar.startsWith('a_') ? 'gif' : 'png';
             userAvatar.src = `https://cdn.discordapp.com/avatars/${userId}/${avatar}.${ext}`;
