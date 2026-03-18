@@ -50,25 +50,25 @@
     <div class="cork-board-bg"></div>
     <div class="dust-particles"></div>
 
-    <!-- User Profile (hidden until auth) -->
-    <div id="user-profile" style="position: absolute; top: 20px; right: 20px; display: none; align-items: center; gap: 10px; z-index: 100;" class="pinned-card gs-panel handwritten">
-        <img id="user-avatar" src="" style="width: 40px; height: 40px; border-radius: 50%;" alt="Discord Avatar">
-        <span id="welcome-message"></span>
-        <button id="logout-btn" class="sticky-btn red handwritten" style="padding: 5px 10px; font-size: 0.8em; margin-left: 10px;">Exit</button>
-    </div>
+
 
     <!-- Login Overlay -->
-    <div id="login-overlay" class="container" style="min-height: 100vh; display: flex; align-items: center; justify-content: center; z-index: 50;">
-        <div class="pinned-card main-note gs-panel" style="--rotation: -1deg; max-width: 400px; width: 100%; text-align: center;">
+    <div id="login-overlay" class="container"
+        style="min-height: 100vh; display: flex; align-items: center; justify-content: center; z-index: 50;">
+        <div class="pinned-card main-note gs-panel"
+            style="--rotation: -1deg; max-width: 400px; width: 100%; text-align: center;">
             <div class="push-pin pin-red top-center"></div>
             <h2 class="marker-font">Access Restricted</h2>
-            <p class="handwritten mt-4">This classified board requires authorization. Run the <code>/verify</code> command in the official Discord server to receive an access code.</p>
-            
+            <p class="handwritten mt-4">This classified board requires authorization. Run the <code>/verify</code>
+                command in the official <a href="https://discord.gg/slly">Discord server</a> to receive an access code.
+            </p>
+
             <div class="input-group mt-4" style="text-align: left;">
                 <label for="tokenInput" class="handwritten">Access Code</label>
-                <input type="text" id="tokenInput" placeholder="Enter your token here..." class="handwritten input-handdrawn" style="width: 100%;">
+                <input type="text" id="tokenInput" placeholder="Enter your token here..."
+                    class="handwritten input-handdrawn" style="width: 100%;">
             </div>
-            
+
             <p id="login-error" class="handwritten text-center mt-2" style="color: #d92b2b; display: none;"></p>
 
             <button class="sticky-btn yellow handwritten mt-4" id="login-btn" style="width: 100%;">Authenticate</button>
@@ -87,10 +87,20 @@
                         class="char">n</span><span class="char">m</span><span class="char">o</span>
                 </h1>
                 <p class="hero-subtitle handwritten">Ghost Speed & Footstep Simulation Board</p>
-                <!-- For GSAP errors check -->
-                <div class="scroll-indicator" style="display: none;"><span></span>
-                    <div class="line"></div>
+                <!-- User Profile (hidden until auth) -->
+                <div id="user-profile"
+                    style="display: none; align-items: center; gap: 8px; margin-top: 12px; flex-wrap: wrap;"
+                    class="handwritten">
+                    <img id="user-avatar" src="" style="width: 32px; height: 32px; border-radius: 50%;"
+                        alt="Discord Avatar">
+                    <span id="welcome-message"></span>
+                    <button id="logout-btn" class="sticky-btn red handwritten"
+                        style="padding: 4px 10px; font-size: 0.8em;">Exit</button>
                 </div>
+                <href> <!-- For GSAP errors check -->
+                    <div class="scroll-indicator" style="display: none;"><span></span>
+                        <div class="line"></div>
+                    </div>
             </div>
 
             <!-- Footstep Simulator Panel -->
@@ -195,7 +205,7 @@
             </div>
         </div>
 
-        <!-- Right Column: Ghost List Notebook -->
+        <!-- Right Column: Ghost List Notebook + Investigators -->
         <div class="right-col">
             <div class="notebook-card gs-panel" style="--rotation: 1deg;">
                 <div class="tape-strip top-left" style="--tape-rot: -45deg; top: -10px; left: -20px; width: 80px;">
@@ -223,25 +233,77 @@
                     <div class="helper-text text-center mt-2">Log BPM to filter suspects.</div>
                 </div>
             </div>
+
+            <!-- Credits Card -->
+            <div class="pinned-card gs-panel" id="credits-card" style="--rotation: -0.5deg;">
+                <div class="tape-strip top-center"></div>
+
+                <h2 class="marker-font" style="margin-bottom: 1rem;">The Investigators</h2>
+
+                <div class="credits-owners">
+                    <!-- Art -->
+                    <div class="owner-tile">
+                        <img id="owner-art-avatar" src="" alt="art's avatar" class="owner-avatar">
+                        <span class="owner-name handwritten">Art</span>
+                        <div class="owner-links">
+                            <a href="https://www.tiktok.com/@xyz" target="_blank" rel="noopener"
+                                class="owner-link handwritten">
+                                <svg viewBox="0 0 24 24" fill="currentColor" width="14" height="14">
+                                    <path
+                                        d="M19.59 6.69a4.83 4.83 0 0 1-3.77-4.25V2h-3.45v13.67a2.89 2.89 0 0 1-2.88 2.5 2.89 2.89 0 0 1-2.89-2.89 2.89 2.89 0 0 1 2.89-2.89c.28 0 .54.04.79.1V9.01a6.33 6.33 0 0 0-.79-.05 6.34 6.34 0 0 0-6.34 6.34 6.34 6.34 0 0 0 6.34 6.34 6.34 6.34 0 0 0 6.33-6.34V8.69a8.18 8.18 0 0 0 4.79 1.52V6.75a4.85 4.85 0 0 1-1.02-.06z" />
+                                </svg>
+                                TikTok
+                            </a>
+                        </div>
+                    </div>
+
+                    <div class="credits-divider"></div>
+
+                    <!-- Vekn -->
+                    <div class="owner-tile">
+                        <img id="owner-vekn-avatar" src="" alt="vekn's avatar" class="owner-avatar">
+                        <span class="owner-name handwritten">vekn</span>
+                        <div class="owner-links">
+                            <a href="https://www.tiktok.com/@vveknn" target="_blank" rel="noopener"
+                                class="owner-link handwritten">
+                                <svg viewBox="0 0 24 24" fill="currentColor" width="14" height="14">
+                                    <path
+                                        d="M19.59 6.69a4.83 4.83 0 0 1-3.77-4.25V2h-3.45v13.67a2.89 2.89 0 0 1-2.88 2.5 2.89 2.89 0 0 1-2.89-2.89 2.89 2.89 0 0 1 2.89-2.89c.28 0 .54.04.79.1V9.01a6.33 6.33 0 0 0-.79-.05 6.34 6.34 0 0 0-6.34 6.34 6.34 6.34 0 0 0 6.34 6.34 6.34 6.34 0 0 0 6.33-6.34V8.69a8.18 8.18 0 0 0 4.79 1.52V6.75a4.85 4.85 0 0 1-1.02-.06z" />
+                                </svg>
+                                TikTok
+                            </a>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="credits-discord">
+                    <a href="https://discord.gg/slly" target="_blank" rel="noopener" class="owner-link handwritten">
+                        <svg viewBox="0 0 24 24" fill="currentColor" width="16" height="16">
+                            <path
+                                d="M20.317 4.37a19.791 19.791 0 0 0-4.885-1.515.074.074 0 0 0-.079.037c-.21.375-.444.864-.608 1.25a18.27 18.27 0 0 0-5.487 0 12.64 12.64 0 0 0-.617-1.25.077.077 0 0 0-.079-.037A19.736 19.736 0 0 0 3.677 4.37a.07.07 0 0 0-.032.027C.533 9.046-.32 13.58.099 18.057a.082.082 0 0 0 .031.057 19.9 19.9 0 0 0 5.993 3.03.078.078 0 0 0 .084-.028 14.09 14.09 0 0 0 1.226-1.994.076.076 0 0 0-.041-.106 13.107 13.107 0 0 1-1.872-.892.077.077 0 0 1-.008-.128 10.2 10.2 0 0 0 .372-.292.074.074 0 0 1 .077-.01c3.928 1.793 8.18 1.793 12.062 0a.074.074 0 0 1 .078.01c.12.098.246.198.373.292a.077.077 0 0 1-.006.127 12.299 12.299 0 0 1-1.873.892.077.077 0 0 0-.041.107c.36.698.772 1.362 1.225 1.993a.076.076 0 0 0 .084.028 19.839 19.839 0 0 0 6.002-3.03.077.077 0 0 0 .032-.054c.5-5.177-.838-9.674-3.549-13.66a.061.061 0 0 0-.031-.03z" />
+                        </svg>
+                        Join the Discord
+                    </a>
+                </div>
+            </div>
         </div>
 
-    </div>
 
-    <!-- Background typography rows for JS backwards compatibility so it doesn't crash, but invisible -->
-    <div style="display:none;" class="row-1">_</div>
-    <div style="display:none;" class="row-2">_</div>
-    <div style="display:none;" class="row-3">_</div>
-    <div style="display:none;" class="row-4">_</div>
+        <!-- Background typography rows for JS backwards compatibility so it doesn't crash, but invisible -->
+        <div style="display:none;" class="row-1">_</div>
+        <div style="display:none;" class="row-2">_</div>
+        <div style="display:none;" class="row-3">_</div>
+        <div style="display:none;" class="row-4">_</div>
 
-    <!-- Scripts -->
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js"></script>
-    <script src="https://unpkg.com/@studio-freight/lenis@1.0.33/dist/lenis.min.js"></script>
+        <!-- Scripts -->
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js"></script>
+        <script src="https://unpkg.com/@studio-freight/lenis@1.0.33/dist/lenis.min.js"></script>
 
-    <script type="module" src="./main.js"></script>
-    <script>
-        window.si = window.si || function () { (window.siq = window.siq || []).push(arguments); };
-    </script>
+        <script type="module" src="./main.js"></script>
+        <script>
+            window.si = window.si || function () { (window.siq = window.siq || []).push(arguments); };
+        </script>
 </body>
 
 </html>

@@ -52,6 +52,21 @@ export function setupAuth() {
         loginOverlay.style.display = 'none';
         appContent.style.display = ''; // Revert to default stylesheet CSS (e.g., grid)
         userProfile.style.display = 'flex';
+        loadOwnerAvatars();
+    }
+
+    async function loadOwnerAvatars() {
+        try {
+            const res = await fetch(`${import.meta.env.VITE_API_URL}/api/owners`);
+            if (!res.ok) return;
+            const { art, vekn } = await res.json();
+            const artImg  = document.getElementById('owner-art-avatar');
+            const veknImg = document.getElementById('owner-vekn-avatar');
+            if (artImg  && art?.avatar)  artImg.src  = art.avatar;
+            if (veknImg && vekn?.avatar) veknImg.src = vekn.avatar;
+        } catch {
+            // silently fail — avatars stay blank
+        }
     }
 
     function displayUser(username, userId, avatar) {
@@ -80,7 +95,7 @@ export function setupAuth() {
         loginError.style.display = 'none';
 
         try {
-            const res = await fetch('http://localhost:3000/api/verify', {
+            const res = await fetch(`${import.meta.env.VITE_API_URL}/api/verify`, {
                 method: 'POST',
                 headers: { 'Content-Type': 'application/json' },
                 body: JSON.stringify({ token })
