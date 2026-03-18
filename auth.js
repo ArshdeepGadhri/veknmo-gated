@@ -57,12 +57,12 @@ export function setupAuth() {
 
     async function loadOwnerAvatars() {
         try {
-            const res = await fetch(`${import.meta.env.VITE_API_URL}/api/owners`);
+            const res = await fetch(`${process.env.VITE_API_URL}/api/owners`);
             if (!res.ok) return;
             const { art, vekn } = await res.json();
-            const artImg  = document.getElementById('owner-art-avatar');
+            const artImg = document.getElementById('owner-art-avatar');
             const veknImg = document.getElementById('owner-vekn-avatar');
-            if (artImg  && art?.avatar)  artImg.src  = art.avatar;
+            if (artImg && art?.avatar) artImg.src = art.avatar;
             if (veknImg && vekn?.avatar) veknImg.src = vekn.avatar;
         } catch {
             // silently fail — avatars stay blank
@@ -95,7 +95,7 @@ export function setupAuth() {
         loginError.style.display = 'none';
 
         try {
-            const res = await fetch(`${import.meta.env.VITE_API_URL}/api/verify`, {
+            const res = await fetch(`${process.env.VITE_API_URL.VITE_API_URL}/api/verify`, {
                 method: 'POST',
                 headers: { 'Content-Type': 'application/json' },
                 body: JSON.stringify({ token })
