@@ -3,8 +3,16 @@ import { inject } from '@vercel/analytics';
 import { WebHaptics } from 'web-haptics';
 import footstepAudioUrl from './assets/footstep.ogg';
 import { setupAuth } from './auth.js';
+import { io } from "socket.io-client";
 
 inject();
+
+// Connect Socket.io to the backend to track live investigators
+const socket = io(import.meta.env.VITE_API_URL || 'http://localhost:3000');
+socket.on('viewerCount', (count) => {
+    const counterEl = document.getElementById('viewer-count');
+    if (counterEl) counterEl.textContent = count;
+});
 
 const isAuthenticated = setupAuth();
 
