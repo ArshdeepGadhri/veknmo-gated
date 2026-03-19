@@ -369,10 +369,6 @@ document.querySelectorAll('.tape-strip').forEach(tape => {
 
         card.classList.add('is-falling');
         const dir = Math.random() > 0.5 ? 1 : -1;
-        // Calculate exact distance to fall off the bottom of the screen
-        const rect = card.getBoundingClientRect();
-        const dropDistance = window.innerHeight - rect.top + 300; // 300px buffer ensures it fully exits
-
         const fallTimeline = gsap.timeline({
             onComplete: () => {
                 card.classList.remove('is-falling');
@@ -388,7 +384,7 @@ document.querySelectorAll('.tape-strip').forEach(tape => {
         })
         // 2. Fall straight down out of view
         .to(card, {
-            y: dropDistance,
+            y: window.innerHeight * 1.2,
             rotation: `+=${dir * 30}`,
             duration: 0.8,
             ease: "power2.in"
@@ -406,7 +402,7 @@ document.querySelectorAll('.tape-strip').forEach(tape => {
             duration: 0.8,
             ease: "power2.inOut"
         })
-        // 5. Restore CSS-controlled transforms and opacity without wiping inline CSS variables
+        // 5. Restore CSS-controlled transforms and opacity without nuking inline --rotation variables
         .set(card, {
             clearProps: "transform,opacity"
         });
