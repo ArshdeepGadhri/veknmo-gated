@@ -18,16 +18,16 @@
 
 /* ── Dark Mode Overrides ── */
 body.dark-mode {
-    --paper-bg: #2e2e2e;
-    --paper-dark: #262626;
+    --paper-bg: #0a0a0a;
+    --paper-dark: #000000;
     --text-color: #ddd8cc;
-    --notebook-line: #3a4a5a;
-    --tape-color: #555;
+    --notebook-line: #2a3a4a;
+    --tape-color: #444;
     color: #ddd8cc;
 }
 
 body.dark-mode .cork-board-bg {
-    filter: brightness(0.35) sepia(0.2);
+    filter: brightness(0.15) sepia(0.1) grayscale(0.5);
 }
 
 body.dark-mode .pinned-card,
