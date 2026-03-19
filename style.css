@@ -99,6 +99,9 @@ body.dark-mode .ghost-item {
 }
 
 /* Lenis Recommended CSS - keeping it so it doesn't break scrolling */
+html {
+    overflow-y: scroll;
+}
 html.lenis,
 html.lenis body {
     height: auto;
@@ -296,6 +299,13 @@ h2 {
     filter: drop-shadow(0 2px 4px rgba(0, 0, 0, 0.4));
     z-index: 10;
     transform: rotate(var(--tape-rot, -3deg));
+    cursor: pointer;
+    transition: filter 0.2s ease, transform 0.2s ease;
+}
+
+.tape-strip:hover {
+    filter: drop-shadow(0 4px 8px rgba(0, 0, 0, 0.6)) brightness(1.1);
+    transform: rotate(var(--tape-rot, -3deg)) translateY(-2px);
 }
 
 .top-left {

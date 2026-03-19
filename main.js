@@ -356,3 +356,56 @@ if ('serviceWorker' in navigator) {
         localStorage.setItem('darkMode', isDark);
     });
 })();
+
+// --- Funny Tape Drag / Drop Animation ---
+document.querySelectorAll('.tape-strip').forEach(tape => {
+    tape.addEventListener('click', (e) => {
+        // Prevent GSAP conflicts
+        if (e.target.closest('.is-falling')) return;
+
+        // Find parent card (pins, notebook, or login card)
+        const card = e.target.closest('.pinned-card') || e.target.closest('.notebook-card');
+        if (!card) return;
+
+        card.classList.add('is-falling');
+        const dir = Math.random() > 0.5 ? 1 : -1;
+        const fallTimeline = gsap.timeline({
+            onComplete: () => {
+                card.classList.remove('is-falling');
+            }
+        });
+
+        // 1. "Rip off" detach effect
+        fallTimeline.to(card, {
+            scale: 1.05,
+            rotation: `+=${dir * 6}`,
+            duration: 0.15,
+            ease: "power2.out"
+        })
+        // 2. Fall straight down out of view
+        .to(card, {
+            y: window.innerHeight * 1.2,
+            rotation: `+=${dir * 30}`,
+            duration: 0.8,
+            ease: "power2.in"
+        })
+        // 3. Secretly move above the screen while out of view
+        .set(card, {
+            y: -(window.innerHeight * 1.2)
+        }, "+=1.5") // stay hidden at bottom for 1.5 seconds
+        // 4. Drop back down into place
+        .to(card, {
+            y: 0,
+            scale: 1,
+            // Land EXACTLY on the CSS rotation variable so that when clearProps runs,
+            // there is zero visual difference, preventing the CSS transition from jittering.
+            rotation: parseFloat(getComputedStyle(card).getPropertyValue('--rotation')) || 0,
+            duration: 1.2,
+            ease: "bounce.out"
+        })
+        // 5. Restore CSS-controlled transforms
+        .set(card, {
+            clearProps: "transform"
+        });
+    });
+});

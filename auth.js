@@ -70,7 +70,7 @@ export function setupAuth() {
     }
 
     function displayUser(username, userId, avatar) {
-        welcomeMessage.innerHTML = `👻 Welcome back investigator,<br><b>@${username}</b>`;
+        welcomeMessage.innerHTML = `Welcome back investigator,<br><b>@${username}</b>`;
 
         if (avatar) {
             let ext = avatar.startsWith('a_') ? 'gif' : 'png';
