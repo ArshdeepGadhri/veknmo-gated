@@ -369,6 +369,10 @@ document.querySelectorAll('.tape-strip').forEach(tape => {
 
         card.classList.add('is-falling');
         const dir = Math.random() > 0.5 ? 1 : -1;
+        // Calculate exact distance to fall off the bottom of the screen
+        const rect = card.getBoundingClientRect();
+        const dropDistance = window.innerHeight - rect.top + 300; // 300px buffer ensures it fully exits
+
         const fallTimeline = gsap.timeline({
             onComplete: () => {
                 card.classList.remove('is-falling');
@@ -384,28 +388,27 @@ document.querySelectorAll('.tape-strip').forEach(tape => {
         })
         // 2. Fall straight down out of view
         .to(card, {
-            y: window.innerHeight * 1.2,
+            y: dropDistance,
             rotation: `+=${dir * 30}`,
             duration: 0.8,
             ease: "power2.in"
         })
-        // 3. Secretly move above the screen while out of view
+        // 3. Secretly move back to original spot but make it invisible
         .set(card, {
-            y: -(window.innerHeight * 1.2)
-        }, "+=1.5") // stay hidden at bottom for 1.5 seconds
-        // 4. Drop back down into place
-        .to(card, {
             y: 0,
             scale: 1,
-            // Land EXACTLY on the CSS rotation variable so that when clearProps runs,
-            // there is zero visual difference, preventing the CSS transition from jittering.
             rotation: parseFloat(getComputedStyle(card).getPropertyValue('--rotation')) || 0,
-            duration: 1.2,
-            ease: "bounce.out"
+            opacity: 0
+        }, "+=1.5") // stay hidden at bottom for 1.5 seconds
+        // 4. Fade back in
+        .to(card, {
+            opacity: 1,
+            duration: 0.8,
+            ease: "power2.inOut"
         })
-        // 5. Restore CSS-controlled transforms
+        // 5. Restore CSS-controlled transforms and opacity without wiping inline CSS variables
         .set(card, {
-            clearProps: "transform"
+            clearProps: "transform,opacity"
         });
     });
 });
