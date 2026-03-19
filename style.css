@@ -47,6 +47,39 @@ body.dark-mode h2 {
     border-bottom-color: rgba(255,255,255,0.15);
 }
 
+/* Flashlight Overlay - Very dark with a large clear circle tracking cursor */
+.flashlight-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    pointer-events: none;
+    z-index: 9998; /* sits on top of everything except tooltips (9999) */
+    background: radial-gradient(circle 800px at var(--cursor-x, 50vw) var(--cursor-y, 50vh), 
+        transparent 0%, 
+        rgba(0,0,0,0.15) 20%, 
+        rgba(0,0,0,0.65) 100%
+    );
+    opacity: 0;
+    transition: opacity 0.5s ease;
+}
+
+body.dark-mode.flashlight-on .flashlight-overlay {
+    opacity: 1;
+}
+
+/* Flashlight Button Visibility */
+body.dark-mode #flashlight-toggle {
+    display: inline-block !important; /* overrides inline none */
+}
+
+/* Dim button when disabled */
+body:not(.flashlight-on) #flashlight-toggle {
+    opacity: 0.4;
+    filter: grayscale(1);
+}
+
 body.dark-mode .helper-text,
 body.dark-mode .stat-label,
 body.dark-mode .ghost-speed-wrap {

@@ -357,6 +357,36 @@ if ('serviceWorker' in navigator) {
     });
 })();
 
+// --- Flashlight Toggle ---
+(function initFlashlight() {
+    const toggle = document.getElementById('flashlight-toggle');
+    if (!toggle) return;
+
+    // Default to true if user hasn't toggled it yet
+    const saved = localStorage.getItem('flashlightOn');
+    const isOn = saved === null ? true : saved === 'true';
+    
+    document.body.classList.toggle('flashlight-on', isOn);
+
+    toggle.addEventListener('click', () => {
+        const currentlyOn = document.body.classList.contains('flashlight-on');
+        const nextState = !currentlyOn;
+        document.body.classList.toggle('flashlight-on', nextState);
+        localStorage.setItem('flashlightOn', nextState);
+    });
+})();
+
+// --- Flashlight Effect Tracker ---
+document.addEventListener('mousemove', (e) => {
+    // Only spend performance updating the variables if the dark mode overlay is actually visible
+    if (document.body.classList.contains('dark-mode')) {
+        requestAnimationFrame(() => {
+            document.documentElement.style.setProperty('--cursor-x', `${e.clientX}px`);
+            document.documentElement.style.setProperty('--cursor-y', `${e.clientY}px`);
+        });
+    }
+});
+
 // --- Funny Tape Drag / Drop Animation ---
 document.querySelectorAll('.tape-strip').forEach(tape => {
     tape.addEventListener('click', (e) => {
