@@ -604,11 +604,24 @@ select.input-handdrawn {
     gap: 0.2rem;
     font-size: 1.3rem;
     line-height: 1.2;
+    cursor: pointer;
+    transition: background 0.2s, transform 0.2s, opacity 0.2s;
 }
 
 .ghost-item:hover {
     background: rgba(0, 0, 0, 0.02);
     transform: translateX(4px);
+}
+
+.ghost-item.crossed-out {
+    opacity: 0.5;
+}
+
+.ghost-item.crossed-out .ghost-name,
+.ghost-item.crossed-out .ghost-speed-wrap {
+    text-decoration: line-through;
+    text-decoration-color: var(--pin-red);
+    text-decoration-thickness: 2px;
 }
 
 .ghost-name {

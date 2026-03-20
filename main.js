@@ -173,6 +173,12 @@ function updateGhostFilter(estimatedBaseSpeed) {
             <span class="ghost-name">${ghost.name}</span>
             <div class="ghost-speed-wrap">${speedText}</div>
         `;
+        
+        el.addEventListener('click', () => {
+            el.classList.toggle('crossed-out');
+            if (typeof haptics !== 'undefined' && haptics) haptics.trigger('nudge');
+        });
+
         container.appendChild(el);
     });
 }
