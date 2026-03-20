@@ -44,7 +44,7 @@ body.dark-mode .owner-name {
 }
 
 body.dark-mode h2 {
-    border-bottom-color: rgba(255,255,255,0.15);
+    border-bottom-color: rgba(255, 255, 255, 0.15);
 }
 
 /* Flashlight Overlay - Very dark with a large clear circle tracking cursor */
@@ -55,12 +55,12 @@ body.dark-mode h2 {
     width: 100vw;
     height: 100vh;
     pointer-events: none;
-    z-index: 9998; /* sits on top of everything except tooltips (9999) */
-    background: radial-gradient(circle 800px at var(--cursor-x, 50vw) var(--cursor-y, 50vh), 
-        transparent 0%, 
-        rgba(0,0,0,0.15) 20%, 
-        rgba(0,0,0,0.65) 100%
-    );
+    z-index: 9998;
+    /* sits on top of everything except tooltips (9999) */
+    background: radial-gradient(circle 800px at var(--cursor-x, 50vw) var(--cursor-y, 50vh),
+            transparent 0%,
+            rgba(0, 0, 0, 0.15) 20%,
+            rgba(0, 0, 0, 0.65) 100%);
     opacity: 0;
     transition: opacity 0.5s ease;
 }
@@ -71,7 +71,8 @@ body.dark-mode.flashlight-on .flashlight-overlay {
 
 /* Flashlight Button Visibility */
 body.dark-mode #flashlight-toggle {
-    display: inline-block !important; /* overrides inline none */
+    display: inline-block !important;
+    /* overrides inline none */
 }
 
 /* Dim button when disabled */
@@ -88,40 +89,54 @@ body.dark-mode .ghost-speed-wrap {
 
 body.dark-mode .stat-value {
     color: #ede8dc;
-    background: rgba(255,255,255,0.07);
-    border-color: rgba(255,255,255,0.12);
+    background: rgba(255, 255, 255, 0.07);
+    border-color: rgba(255, 255, 255, 0.12);
 }
 
 body.dark-mode .input-handdrawn {
     color: #ede8dc;
-    border-bottom-color: rgba(255,255,255,0.3);
+    border-bottom-color: rgba(255, 255, 255, 0.3);
 }
 
 /* sticky button colours are intentionally NOT overridden — same as light mode */
-body.dark-mode .sticky-btn        { color: #111; }
-
-body.dark-mode .sticky-btn::after {
-    border-color: rgba(0,0,0,0.15) var(--paper-dark) var(--paper-dark) rgba(0,0,0,0.15);
+body.dark-mode .sticky-btn {
+    color: #111;
 }
 
-body.dark-mode .tooltip-icon      { color: #888; }
-body.dark-mode .tooltip-content   { background: var(--paper-bg); color: #ddd8cc; }
+body.dark-mode .sticky-btn::after {
+    border-color: rgba(0, 0, 0, 0.15) var(--paper-dark) var(--paper-dark) rgba(0, 0, 0, 0.15);
+}
+
+body.dark-mode .tooltip-icon {
+    color: #888;
+}
+
+body.dark-mode .tooltip-content {
+    background: var(--paper-bg);
+    color: #ddd8cc;
+}
 
 body.dark-mode .owner-link {
     background: var(--paper-dark);
     color: #bbb;
-    border-color: rgba(255,255,255,0.1);
+    border-color: rgba(255, 255, 255, 0.1);
 }
-body.dark-mode .owner-link:hover  { background: #303030; }
+
+body.dark-mode .owner-link:hover {
+    background: #303030;
+}
 
 body.dark-mode .credits-discord .owner-link {
     background: #1a2a3a;
-    border-color: rgba(25,118,210,0.25);
+    border-color: rgba(25, 118, 210, 0.25);
 }
-body.dark-mode .credits-discord .owner-link:hover { background: #1e3349; }
+
+body.dark-mode .credits-discord .owner-link:hover {
+    background: #1e3349;
+}
 
 body.dark-mode .ghost-item {
-    border-bottom-color: rgba(255,255,255,0.08);
+    border-bottom-color: rgba(255, 255, 255, 0.08);
 }
 
 @font-face {
@@ -135,6 +150,7 @@ body.dark-mode .ghost-item {
 html {
     overflow-y: scroll;
 }
+
 html.lenis,
 html.lenis body {
     height: auto;
@@ -337,14 +353,15 @@ h2 {
 }
 
 .tape-strip:hover {
-    filter: drop-shadow(0 4px 8px rgba(0, 0, 0, 0.6)) brightness(1.1);
-    transform: rotate(var(--tape-rot, -3deg)) translateY(-2px);
+    filter: drop-shadow(0 3px 6px rgba(0, 0, 0, 0.5)) brightness(1.05);
+    transform: rotate(var(--tape-rot, -3deg)) translateY(-0.5px);
 }
 
 .top-left {
     top: 10px;
     left: 10px;
 }
+
 .tape-strip.top-left {
     top: -5px;
     left: -15px;
@@ -354,6 +371,7 @@ h2 {
     top: 10px;
     right: 10px;
 }
+
 .tape-strip.top-right {
     top: -5px;
     right: -15px;
@@ -364,14 +382,20 @@ h2 {
     left: 50%;
     transform: translateX(-50%) rotate(var(--tape-rot, -2deg));
 }
+
 .tape-strip.top-center {
     top: -15px;
+}
+
+.tape-strip.top-center:hover {
+    transform: translateX(-50%) rotate(var(--tape-rot, -2deg)) translateY(-0.5px);
 }
 
 .bottom-left {
     bottom: 10px;
     left: 10px;
 }
+
 .tape-strip.bottom-left {
     bottom: -5px;
     left: -15px;
@@ -381,6 +405,7 @@ h2 {
     bottom: 10px;
     right: 10px;
 }
+
 .tape-strip.bottom-right {
     bottom: -5px;
     right: -15px;
@@ -603,6 +628,189 @@ select.input-handdrawn {
     border-bottom-color: var(--pin-red);
 }
 
+/* ── Polaroid Map Card ── */
+.polaroid-card {
+    background: #fdfdfd;
+    padding: 1rem 1rem 3rem 1rem;
+    position: relative;
+    z-index: 1;
+    box-shadow: 2px 5px 15px rgba(0, 0, 0, 0.4);
+    transform: rotate(var(--rotation, 2deg));
+    transition: transform 0.3s ease, box-shadow 0.3s ease, z-index 0s, background-color 0.3s ease;
+    margin-top: 3rem;
+    border-radius: 3px;
+    /* subtle paper texture */
+}
+
+body.dark-mode .polaroid-card {
+    background-color: var(--paper-bg);
+    box-shadow: 2px 7px 20px rgba(0, 0, 0, 0.8);
+}
+
+.polaroid-card:hover {
+    transform: scale(1.03) rotate(calc(var(--rotation, 2deg) + 1deg));
+    box-shadow: 4px 10px 25px rgba(0, 0, 0, 0.5);
+    z-index: 100;
+}
+
+.polaroid-image-container {
+    width: 100%;
+    aspect-ratio: 4 / 3;
+    background: #000000;
+    overflow: hidden;
+    margin-top: 2rem;
+    /* Space for the pin */
+    border-radius: 2px;
+    box-shadow: inset 0 0 10px rgba(0, 0, 0, 0.8);
+}
+
+.polaroid-image-container img {
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+    filter: sepia(0.15) contrast(1.1) brightness(0.9);
+    /* slight vintage feel */
+    transition: opacity 0.3s ease;
+}
+
+.polaroid-caption {
+    margin-top: 1rem;
+    display: flex;
+    justify-content: center;
+}
+
+.polaroid-caption select,
+.styled-dropdown {
+    color: #111;
+    background: transparent;
+    appearance: none;
+    text-align-last: center;
+    padding: 0.2rem 2.5rem 0.2rem 1rem;
+    border-bottom: 2px dashed rgba(0,0,0,0.4);
+    background-image: url('data:image/svg+xml;utf8,<svg fill="%23111" height="32" viewBox="0 0 24 24" width="32" xmlns="http://www.w3.org/2000/svg"><path d="M7 10l5 5 5-5z"/></svg>');
+    background-repeat: no-repeat;
+    background-position: right 5px center;
+    transition: color 0.2s, transform 0.2s;
+}
+
+.polaroid-caption select:hover,
+.styled-dropdown:hover {
+    color: var(--pin-red);
+    transform: scale(1.02);
+}
+
+body.dark-mode .polaroid-caption select,
+body.dark-mode .styled-dropdown {
+    color: var(--text-color);
+    border-bottom-color: rgba(255,255,255,0.3);
+    background-image: url('data:image/svg+xml;utf8,<svg fill="%23ddd8cc" height="32" viewBox="0 0 24 24" width="32" xmlns="http://www.w3.org/2000/svg"><path d="M7 10l5 5 5-5z"/></svg>');
+}
+
+body.dark-mode .polaroid-caption select option {
+    background: var(--paper-bg);
+    color: var(--text-color);
+}
+
+/* ── Timers Panel ── */
+.timer-item {
+    display: flex;
+    flex-direction: column;
+    gap: 0.2rem;
+}
+
+.timer-header {
+    font-size: 1.4rem;
+    color: #111;
+}
+
+body.dark-mode .timer-header {
+    color: #ede8dc;
+}
+
+.timer-row {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+}
+
+.timer-toggle-btn {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 4px;
+}
+
+.timer-bar-container {
+    flex-grow: 1;
+    display: flex;
+    flex-direction: column;
+    position: relative;
+    padding-top: 1rem;
+}
+
+.timer-labels {
+    position: relative;
+    height: 18px;
+    width: 100%;
+}
+
+.timer-labels span {
+    position: absolute;
+    bottom: 2px;
+    transform: translateX(-50%);
+    font-size: 0.95rem;
+    font-family: 'Special Elite', monospace;
+    white-space: nowrap;
+}
+
+.timer-bar {
+    width: 100%;
+    height: 12px;
+    background: rgba(0, 0, 0, 0.1);
+    border-radius: 6px;
+    position: relative;
+    overflow: hidden;
+    border: 1px solid rgba(0, 0, 0, 0.2);
+}
+
+body.dark-mode .timer-bar {
+    background: rgba(255, 255, 255, 0.05);
+    border-color: rgba(255, 255, 255, 0.1);
+}
+
+.timer-progress {
+    height: 100%;
+    width: 100%;
+    background: var(--tape-color);
+    transform-origin: left;
+    transition: width 0.1s linear;
+}
+
+.timer-tick {
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    width: 2px;
+    background: transparent;
+    border-left: 2px dashed #111;
+    transform: translateX(-50%);
+}
+
+body.dark-mode .timer-tick {
+    border-left-style: solid;
+}
+
+.timer-display {
+    font-size: 1.4rem;
+    color: #111;
+    min-width: 55px;
+    text-align: right;
+}
+
+body.dark-mode .timer-display {
+    color: #ede8dc;
+}
+
 /* Tooltips */
 .tooltip-wrapper {
     position: absolute;
@@ -691,7 +899,7 @@ select.input-handdrawn {
     height: 80px;
     border-radius: 50%;
     object-fit: cover;
-    box-shadow: 2px 3px 8px rgba(0,0,0,0.4);
+    box-shadow: 2px 3px 8px rgba(0, 0, 0, 0.4);
     border: 3px solid var(--paper-dark);
     background: var(--paper-dark);
 }
@@ -720,7 +928,7 @@ select.input-handdrawn {
     border-radius: 4px;
     padding: 0.25rem 0.6rem;
     transition: background 0.2s, transform 0.15s;
-    border: 1px dashed rgba(0,0,0,0.25);
+    border: 1px dashed rgba(0, 0, 0, 0.25);
 }
 
 .owner-link:hover {
@@ -731,13 +939,11 @@ select.input-handdrawn {
 .credits-divider {
     width: 2px;
     min-height: 80px;
-    background: repeating-linear-gradient(
-        to bottom,
-        rgba(0,0,0,0.2) 0px,
-        rgba(0,0,0,0.2) 6px,
-        transparent 6px,
-        transparent 12px
-    );
+    background: repeating-linear-gradient(to bottom,
+            rgba(0, 0, 0, 0.2) 0px,
+            rgba(0, 0, 0, 0.2) 6px,
+            transparent 6px,
+            transparent 12px);
     align-self: center;
 }
 
@@ -790,7 +996,7 @@ select.input-handdrawn {
     border-radius: 2px;
     display: flex;
     align-items: center;
-    box-shadow: 2px 2px 5px rgba(0,0,0,0.3);
+    box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.3);
     transition: background 0.25s ease;
     overflow: visible;
 }
@@ -803,16 +1009,16 @@ select.input-handdrawn {
     right: 0;
     border-width: 8px;
     border-style: solid;
-    border-color: rgba(0,0,0,0.1) var(--paper-dark, #e8e3d3) var(--paper-dark, #e8e3d3) rgba(0,0,0,0.1);
+    border-color: rgba(0, 0, 0, 0.1) var(--paper-dark, #e8e3d3) var(--paper-dark, #e8e3d3) rgba(0, 0, 0, 0.1);
     pointer-events: none;
 }
 
-.dark-toggle input:checked ~ .dark-toggle-track {
+.dark-toggle input:checked~.dark-toggle-track {
     background: #2a2a2a;
 }
 
 body.dark-mode .dark-toggle-track::after {
-    border-color: rgba(255,255,255,0.06) var(--paper-dark, #262626) var(--paper-dark, #262626) rgba(255,255,255,0.06);
+    border-color: rgba(255, 255, 255, 0.06) var(--paper-dark, #262626) var(--paper-dark, #262626) rgba(255, 255, 255, 0.06);
 }
 
 /* Thumb — small push-pin circle */
@@ -823,13 +1029,13 @@ body.dark-mode .dark-toggle-track::after {
     height: 18px;
     border-radius: 50%;
     background: radial-gradient(circle at 35% 35%, #fff 0%, #c8c0a8 60%, #9e9080 100%);
-    box-shadow: 1px 1px 3px rgba(0,0,0,0.45), inset 1px 1px 3px rgba(255,255,255,0.6);
-    transition: transform 0.3s cubic-bezier(0.34,1.56,0.64,1), background 0.3s ease;
+    box-shadow: 1px 1px 3px rgba(0, 0, 0, 0.45), inset 1px 1px 3px rgba(255, 255, 255, 0.6);
+    transition: transform 0.3s cubic-bezier(0.34, 1.56, 0.64, 1), background 0.3s ease;
     z-index: 2;
     flex-shrink: 0;
 }
 
-.dark-toggle input:checked ~ .dark-toggle-track .dark-toggle-thumb {
+.dark-toggle input:checked~.dark-toggle-track .dark-toggle-thumb {
     transform: translateX(26px);
     background: radial-gradient(circle at 35% 35%, #666 0%, #333 60%, #111 100%);
 }
@@ -843,8 +1049,20 @@ body.dark-mode .dark-toggle-track::after {
     pointer-events: none;
 }
 
-.dark-toggle-icon.sun  { right: 5px;  opacity: 1; }
-.dark-toggle-icon.moon { left: 5px;   opacity: 0; }
+.dark-toggle-icon.sun {
+    right: 5px;
+    opacity: 1;
+}
 
-.dark-toggle input:checked ~ .dark-toggle-track .dark-toggle-icon.sun  { opacity: 0; }
-.dark-toggle input:checked ~ .dark-toggle-track .dark-toggle-icon.moon { opacity: 1; }
+.dark-toggle-icon.moon {
+    left: 5px;
+    opacity: 0;
+}
+
+.dark-toggle input:checked~.dark-toggle-track .dark-toggle-icon.sun {
+    opacity: 0;
+}
+
+.dark-toggle input:checked~.dark-toggle-track .dark-toggle-icon.moon {
+    opacity: 1;
+}

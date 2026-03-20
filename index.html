@@ -100,7 +100,8 @@
                     <button id="logout-btn" class="sticky-btn red handwritten"
                         style="padding: 4px 10px; font-size: 0.8em;">Exit</button>
                     <button id="flashlight-toggle" class="sticky-btn yellow handwritten"
-                        style="padding: 4px 10px; font-size: 0.8em; display: none;" title="Toggle Flashlight">🔦</button>
+                        style="padding: 4px 10px; font-size: 0.8em; display: none;"
+                        title="Toggle Flashlight">🔦</button>
                     <label class="dark-toggle" title="Toggle dark mode">
                         <input type="checkbox" id="dark-mode-toggle">
                         <span class="dark-toggle-track">
@@ -154,6 +155,72 @@
                     <button class="sticky-btn red handwritten" id="stop">Stop</button>
                 </div>
             </div>
+
+            <!-- Timers Panel -->
+            <div class="pinned-card gs-panel" id="timers-section" style="--rotation: -1deg;">
+                <div class="push-pin pin-green top-left"></div>
+                <div class="push-pin pin-green top-right"></div>
+
+                <div class="tooltip-wrapper">
+                    <svg class="tooltip-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+                        stroke-linecap="round" stroke-linejoin="round">
+                        <circle cx="12" cy="12" r="10"></circle>
+                        <path d="M9.09 9a3 3 0 0 1 5.83 1c0 2-3 3-3 3"></path>
+                        <line x1="12" y1="17" x2="12.01" y2="17"></line>
+                    </svg>
+                    <div class="tooltip-content handwritten">
+                        Use these timers to track smudge effectiveness and hunt cooldowns. Starting a timer will beep.
+                        Pausing or stopping resets the timer.
+                    </div>
+                </div>
+
+                <h2 class="marker-font">Timers</h2>
+
+                <div class="timer-items-container">
+                    <!-- Smudge Timer -->
+                    <div class="timer-item" data-duration="180">
+                        <div class="timer-header handwritten">Smudge</div>
+                        <div class="timer-row">
+                            <button class="sticky-btn green handwritten timer-toggle-btn"
+                                style="padding: 0.2rem 0.6rem; font-size: 1.2rem; min-width: 45px;">▶</button>
+                            <div class="timer-bar-container">
+                                <div class="timer-labels">
+                                    <span style="left: 66.66%; color: var(--pin-red);">Demon</span>
+                                    <span style="left: 50%; color: #888;"></span>
+                                    <span
+                                        style="left: 0%; color: var(--pin-blue); transform: translateX(0);">Spirit</span>
+                                </div>
+                                <div class="timer-bar">
+                                    <div class="timer-progress"></div>
+                                    <div class="timer-tick" style="left: 66.66%; border-color: var(--pin-red);"></div>
+                                    <div class="timer-tick" style="left: 50%; border-color: #888;"></div>
+                                    <div class="timer-tick" style="left: 1%; border-color: var(--pin-blue);"></div>
+                                </div>
+                            </div>
+                            <span class="timer-display typewriter-font">03:00</span>
+                        </div>
+                    </div>
+
+                    <!-- Cooldown Timer -->
+                    <div class="timer-item mt-4" data-duration="25">
+                        <div class="timer-header handwritten">Hunt Cooldown</div>
+                        <div class="timer-row">
+                            <button class="sticky-btn green handwritten timer-toggle-btn"
+                                style="padding: 0.2rem 0.6rem; font-size: 1.2rem; min-width: 45px;">▶</button>
+                            <div class="timer-bar-container">
+                                <div class="timer-labels">
+                                    <span style="left: 20%; color: var(--pin-red);">Demon</span>
+                                </div>
+                                <div class="timer-bar">
+                                    <div class="timer-progress"></div>
+                                    <div class="timer-tick" style="left: 20%; border-color: var(--pin-red);"></div>
+                                </div>
+                            </div>
+                            <span class="timer-display typewriter-font">00:25</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
         </div>
 
         <!-- Center Column: BPM Analyzer -->
@@ -184,8 +251,8 @@
 
                 <div class="controls mt-4">
                     <div class="input-group">
-                        <label for="speedModifier" class="handwritten">Contract Difficulty / Speed Modifier:</label>
-                        <select id="speedModifier" class="handwritten input-handdrawn">
+                        <label for="speedModifier" class="handwritten">Contract Speed Modifier:</label>
+                        <select id="speedModifier" class="handwritten input-handdrawn styled-dropdown">
                             <option value="0">50%</option>
                             <option value="1">75%</option>
                             <option value="2" selected>100%</option>
@@ -214,6 +281,40 @@
                     <button class="sticky-btn yellow handwritten massive-btn" id="tap">TAP ENTRY<br><span
                             class="text-sm">(Space)</span></button>
                     <button class="sticky-btn pink handwritten" id="reset">Reset Board</button>
+                </div>
+            </div>
+
+            <!-- Polaroid Map Card -->
+            <div class="polaroid-card gs-panel" id="map-section" style="--rotation: 2deg;">
+                <div class="push-pin pin-blue top-center" style="top: 15px; z-index: 20;"></div>
+
+                <div class="polaroid-image-container">
+                    <img id="map-image" src="./assets/maps/6_tanglewood_drive.png" alt="Map"
+                        onerror="this.onerror=null; this.src='data:image/svg+xml;utf8,<svg xmlns=\'http://www.w3.org/2000/svg\' viewBox=\'0 0 400 300\'><rect width=\'400\' height=\'300\' fill=\'%23222\'/><text x=\'50%\' y=\'50%\' fill=\'%23777\' font-family=\'monospace\' font-size=\'20\' text-anchor=\'middle\' alignment-baseline=\'middle\'>Missing Map Image</text></svg>';">
+                </div>
+
+                <div class="polaroid-caption">
+                    <select id="map-selector" class="handwritten input-handdrawn text-center"
+                        style="font-size: 1.8rem; cursor: pointer;">
+                        <option value="6_tanglewood_drive">Tanglewood Drive</option>
+                        <option value="42_edgefield_road">Edgefield Road</option>
+                        <option value="10_ridgeview_court">Ridgeview Court</option>
+                        <option value="grafton_farmhouse">Grafton Farmhouse</option>
+                        <option value="bleasedale_farmhouse">Bleasdale Farmhouse</option>
+                        <option value="13_willow_street">Willow Street</option>
+                        <option value="camp_woodwind">Camp Woodwind</option>
+                        <option value="maple_lodge_campsite">Maple Lodge Campsite</option>
+                        <option value="prison">Prison</option>
+                        <option value="brownstone_high_school">Brownstone High School</option>
+                        <option value="sunny_meadows">Sunny Meadows</option>
+                        <option value="sm_restricted">SM Restricted</option>
+                        <option value="sm_courtyard">SM Courtyard</option>
+                        <option value="sm_female_wing">SM Female Wing</option>
+                        <option value="sm_male_wing">SM Male Wing</option>
+                        <option value="sm_hospital">SM Hospital</option>
+                        <option value="point_hope">Point Hope</option>
+                        <option value="nells_diner">Nell's Diner</option>
+                    </select>
                 </div>
             </div>
         </div>
@@ -299,8 +400,10 @@
                     </a>
                 </div>
 
-                <div id="active-investigators-counter" class="handwritten" style="text-align: center; margin-top: 1rem; color: var(--tape-color); font-size: 0.9em; border-top: 1px dashed rgba(0,0,0,0.1); padding-top: 0.5rem; transition: color 0.3s;">
-                    Active Investigators: <span id="viewer-count" style="font-weight: bold; color: var(--pin-red);">1</span>
+                <div id="active-investigators-counter" class="handwritten"
+                    style="text-align: center; margin-top: 1rem; color: var(--tape-color); font-size: 0.9em; border-top: 1px dashed rgba(0,0,0,0.1); padding-top: 0.5rem; transition: color 0.3s;">
+                    Active Investigators: <span id="viewer-count"
+                        style="font-weight: bold; color: var(--pin-red);">1</span>
                 </div>
             </div>
         </div>

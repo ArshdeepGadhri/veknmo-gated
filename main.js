@@ -446,3 +446,119 @@ document.querySelectorAll('.tape-strip').forEach(tape => {
         });
     });
 });
+
+// --- Map Polaroid Logic ---
+const mapSelector = document.getElementById('map-selector');
+const mapImage = document.getElementById('map-image');
+
+if (mapSelector && mapImage) {
+    mapSelector.addEventListener('change', (e) => {
+        if (typeof haptics !== 'undefined' && haptics) haptics.trigger('nudge');
+        
+        const mapFile = e.target.value;
+        
+        // fade out slightly
+        gsap.to(mapImage, { opacity: 0.5, duration: 0.2, onComplete: () => {
+            mapImage.src = `./assets/maps/${mapFile}.png`;
+            // if it doesn't load as png, it will fall back to SVG handled in HTML onerror
+            
+            // fade back in
+            mapImage.onload = () => {
+                gsap.to(mapImage, { opacity: 1, duration: 0.3 });
+            };
+            // Also fade in if error occurs so placeholder isn't stuck invisible
+            mapImage.onerror = function() {
+                this.onerror=null; 
+                this.src='data:image/svg+xml;utf8,<svg xmlns=\'http://www.w3.org/2000/svg\' viewBox=\'0 0 400 300\'><rect width=\'400\' height=\'300\' fill=\'%23222\'/><text x=\'50%\' y=\'50%\' fill=\'%23777\' font-family=\'monospace\' font-size=\'20\' text-anchor=\'middle\' alignment-baseline=\'middle\'>Missing Map Image</text></svg>';
+                gsap.to(mapImage, { opacity: 1, duration: 0.3 });
+            };
+        }});
+    });
+}
+
+// --- Timers Logic ---
+document.querySelectorAll('.timer-item').forEach(timerEl => {
+    const durationBtn = timerEl.querySelector('.timer-toggle-btn');
+    const displayEl = timerEl.querySelector('.timer-display');
+    const progressEl = timerEl.querySelector('.timer-progress');
+    const duration = parseInt(timerEl.getAttribute('data-duration'));
+    
+    let interval = null;
+    let remaining = duration;
+    let isRunning = false;
+
+    function formatTime(seconds) {
+        const m = Math.floor(seconds / 60).toString().padStart(2, '0');
+        const s = Math.floor(seconds % 60).toString().padStart(2, '0');
+        return `${m}:${s}`;
+    }
+
+    function resetTimer() {
+        clearInterval(interval);
+        isRunning = false;
+        remaining = duration;
+        displayEl.textContent = formatTime(duration);
+        progressEl.style.width = '100%';
+        durationBtn.textContent = '▶';
+        durationBtn.classList.remove('red');
+        durationBtn.classList.add('green');
+    }
+
+    function playBeep(freq = 800, dur = 0.3) {
+        if (!audioCtx) return;
+        if (audioCtx.state === 'suspended') {
+            audioCtx.resume();
+        }
+        try {
+            const osc = audioCtx.createOscillator();
+            const gain = audioCtx.createGain();
+            osc.connect(gain);
+            gain.connect(audioCtx.destination);
+            osc.type = 'sine';
+            osc.frequency.setValueAtTime(freq, audioCtx.currentTime);
+            gain.gain.setValueAtTime(0.1, audioCtx.currentTime);
+            osc.start();
+            gain.gain.exponentialRampToValueAtTime(0.00001, audioCtx.currentTime + dur);
+            osc.stop(audioCtx.currentTime + dur);
+        } catch (e) {
+            console.log("Audio play failed");
+        }
+    }
+
+    // Set initial display
+    resetTimer();
+
+    durationBtn.addEventListener('click', () => {
+        if (typeof haptics !== 'undefined' && haptics) haptics.trigger('nudge');
+        
+        gsap.fromTo(durationBtn, { scale: 0.9 }, { scale: 1, duration: 0.3, ease: "back.out(2)" });
+
+        if (isRunning) {
+            resetTimer();
+        } else {
+            playBeep();
+            isRunning = true;
+            durationBtn.textContent = '⏹';
+            durationBtn.classList.remove('green');
+            durationBtn.classList.add('red');
+            
+            const startTime = Date.now();
+            
+            interval = setInterval(() => {
+                const elapsed = (Date.now() - startTime) / 1000;
+                remaining = duration - elapsed;
+                
+                if (remaining <= 0) {
+                    resetTimer();
+                    playBeep(1000, 0.2); 
+                    setTimeout(() => playBeep(1000, 0.4), 250);
+                    return;
+                }
+                
+                displayEl.textContent = formatTime(remaining);
+                progressEl.style.width = `${(remaining / duration) * 100}%`;
+            }, 50); 
+        }
+    });
+});
+
