@@ -459,7 +459,7 @@ if (mapSelector && mapImage) {
         
         // fade out slightly
         gsap.to(mapImage, { opacity: 0.5, duration: 0.2, onComplete: () => {
-            mapImage.src = `./assets/maps/${mapFile}.png`;
+            mapImage.src = `/maps/${mapFile}.png`;
             // if it doesn't load as png, it will fall back to SVG handled in HTML onerror
             
             // fade back in

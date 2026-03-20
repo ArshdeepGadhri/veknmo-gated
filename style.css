@@ -229,6 +229,20 @@ body {
     }
 }
 
+@media (max-width: 899px) {
+    .left-col, .center-col, .right-col {
+        display: contents;
+    }
+    
+    .left-col > .hero { order: 1; }
+    #simulator-section { order: 2; }
+    #timers-section { order: 3; }
+    .center-col > .main-note { order: 4; }
+    .notebook-card { order: 5; } /* Suspects */
+    #map-section { order: 6; } /* Map */
+    #credits-card { order: 7; }
+}
+
 /* Pinned Elements Base */
 .pinned-card {
     background: var(--paper-bg);
