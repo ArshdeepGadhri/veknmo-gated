@@ -451,6 +451,29 @@ document.querySelectorAll('.tape-strip').forEach(tape => {
 const mapSelector = document.getElementById('map-selector');
 const mapImage = document.getElementById('map-image');
 
+// Create lightbox overlay for the map
+const mapOverlay = document.createElement('div');
+mapOverlay.className = 'map-overlay';
+mapOverlay.id = 'map-overlay';
+const mapOverlayImg = document.createElement('img');
+mapOverlayImg.id = 'map-overlay-img';
+mapOverlay.appendChild(mapOverlayImg);
+document.body.appendChild(mapOverlay);
+
+if (mapImage) {
+    mapImage.style.cursor = 'zoom-in';
+    mapImage.addEventListener('click', () => {
+        mapOverlayImg.src = mapImage.src;
+        mapOverlay.classList.add('active');
+        if (typeof haptics !== 'undefined' && haptics) haptics.trigger('nudge');
+    });
+
+    mapOverlay.addEventListener('click', () => {
+        mapOverlay.classList.remove('active');
+        if (typeof haptics !== 'undefined' && haptics) haptics.trigger('nudge');
+    });
+}
+
 if (mapSelector && mapImage) {
     mapSelector.addEventListener('change', (e) => {
         if (typeof haptics !== 'undefined' && haptics) haptics.trigger('nudge');

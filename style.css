@@ -1080,3 +1080,45 @@ body.dark-mode .dark-toggle-track::after {
 .dark-toggle input:checked~.dark-toggle-track .dark-toggle-icon.moon {
     opacity: 1;
 }
+
+/* ── Map Lightbox Overlay ── */
+.map-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    background: rgba(0, 0, 0, 0.85);
+    z-index: 10000;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 0.3s ease;
+    cursor: zoom-out;
+}
+
+.map-overlay.active {
+    opacity: 1;
+    pointer-events: auto;
+}
+
+.map-overlay img {
+    max-width: 90%;
+    max-height: 90vh;
+    object-fit: contain;
+    border: 10px solid #fdfdfd;
+    border-radius: 4px;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.8);
+    transform: scale(0.9);
+    transition: transform 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+}
+
+.map-overlay.active img {
+    transform: scale(1);
+}
+
+body.dark-mode .map-overlay img {
+    border-color: var(--paper-bg);
+}
