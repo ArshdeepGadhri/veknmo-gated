@@ -239,7 +239,7 @@ body {
     #timers-section { order: 3; }
     .center-col > .main-note { order: 4; }
     .notebook-card { order: 5; } /* Suspects */
-    #map-section { order: 6; } /* Map */
+    #map-section { order: 6; margin-top: 0; margin-bottom: 2rem; } /* Map */
     #credits-card { order: 7; }
 }
 
