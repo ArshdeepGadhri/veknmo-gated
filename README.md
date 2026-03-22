@@ -36,9 +36,31 @@ This tool emphasizes performance, immersion, and modern web standards:
    ```bash
    npm install
    ```
-3. Start the Vite development server:
+3. Environment Configuration:
+   Create a `.env` file in the root of the site directory and point it to your backend API URL (this is the Railway URL if self-hosting):
+   ```env
+   VITE_API_URL=http://localhost:3000
+   ```
+4. Start the Vite development server:
    ```bash
    npm run dev
    ```
 
 > **Note on Audio:** For the Footstep Simulator to function, ensure you have a `footstep.ogg` audio file located in the `assets/` directory. 
+
+## Self-Hosting on Vercel
+
+Vercel is the recommended hosting platform for Vite-based frontend applications.
+
+1. **Create a Vercel Account**: Sign up at [Vercel.com](https://vercel.com).
+2. **Import Project**: Add a new project and import your GitHub repository.
+3. **Configure Project**: 
+   - **Framework Preset**: Vercel should automatically detect **Vite**. If not, select Vite from the dropdown.
+   - **Root Directory**: If your site is in a subfolder (e.g., `veknmo-site`), make sure to click "Edit" next to Root Directory and select it.
+4. **Environment Variables**: Add your backend URL to the Environment Variables section:
+   - **Name**: `VITE_API_URL`
+   - **Value**: `https://your-railway-backend-url.up.railway.app` (Replace with your actual Railway backend URL)
+5. **Deploy**: Click **Deploy**. Vercel will build your static files and give you a live URL in seconds.
+
+*Note: Once deployed, ensure you add your Vercel URL to the `ALLOWED_ORIGINS` array inside the backend `server.js` file to avoid CORS blockages!*
+
