@@ -105,6 +105,7 @@ const ghosts = [
     { name: "Oni", speeds: [1.7] },
     { name: "Onryo", speeds: [1.7] },
     { name: "Phantom", speeds: [1.7, 2.5], conditional: true },
+    { name: "Poltergeist", speeds: [1.7] },
     { name: "Revenant", speeds: [1.0, 3.0], conditional: true },
     { name: "Shade", speeds: [1.7] },
     { name: "Spirit", speeds: [1.7] },
@@ -173,7 +174,7 @@ function updateGhostFilter(estimatedBaseSpeed) {
             <span class="ghost-name">${ghost.name}</span>
             <div class="ghost-speed-wrap">${speedText}</div>
         `;
-        
+
         el.addEventListener('click', () => {
             el.classList.toggle('crossed-out');
             if (typeof haptics !== 'undefined' && haptics) haptics.trigger('nudge');
@@ -379,7 +380,7 @@ if ('serviceWorker' in navigator) {
     // Default to true if user hasn't toggled it yet
     const saved = localStorage.getItem('flashlightOn');
     const isOn = saved === null ? true : saved === 'true';
-    
+
     document.body.classList.toggle('flashlight-on', isOn);
 
     toggle.addEventListener('click', () => {
@@ -426,30 +427,30 @@ document.querySelectorAll('.tape-strip').forEach(tape => {
             duration: 0.15,
             ease: "power2.out"
         })
-        // 2. Fall straight down out of view
-        .to(card, {
-            y: window.innerHeight * 1.2,
-            rotation: `+=${dir * 30}`,
-            duration: 0.8,
-            ease: "power2.in"
-        })
-        // 3. Secretly move back to original spot but make it invisible
-        .set(card, {
-            y: 0,
-            scale: 1,
-            rotation: parseFloat(getComputedStyle(card).getPropertyValue('--rotation')) || 0,
-            opacity: 0
-        }, "+=1.5") // stay hidden at bottom for 1.5 seconds
-        // 4. Fade back in
-        .to(card, {
-            opacity: 1,
-            duration: 0.8,
-            ease: "power2.inOut"
-        })
-        // 5. Restore CSS-controlled transforms and opacity without nuking inline --rotation variables
-        .set(card, {
-            clearProps: "transform,opacity"
-        });
+            // 2. Fall straight down out of view
+            .to(card, {
+                y: window.innerHeight * 1.2,
+                rotation: `+=${dir * 30}`,
+                duration: 0.8,
+                ease: "power2.in"
+            })
+            // 3. Secretly move back to original spot but make it invisible
+            .set(card, {
+                y: 0,
+                scale: 1,
+                rotation: parseFloat(getComputedStyle(card).getPropertyValue('--rotation')) || 0,
+                opacity: 0
+            }, "+=1.5") // stay hidden at bottom for 1.5 seconds
+            // 4. Fade back in
+            .to(card, {
+                opacity: 1,
+                duration: 0.8,
+                ease: "power2.inOut"
+            })
+            // 5. Restore CSS-controlled transforms and opacity without nuking inline --rotation variables
+            .set(card, {
+                clearProps: "transform,opacity"
+            });
     });
 });
 
@@ -483,25 +484,27 @@ if (mapImage) {
 if (mapSelector && mapImage) {
     mapSelector.addEventListener('change', (e) => {
         if (typeof haptics !== 'undefined' && haptics) haptics.trigger('nudge');
-        
+
         const mapFile = e.target.value;
-        
+
         // fade out slightly
-        gsap.to(mapImage, { opacity: 0.5, duration: 0.2, onComplete: () => {
-            mapImage.src = `/maps/${mapFile}.png`;
-            // if it doesn't load as png, it will fall back to SVG handled in HTML onerror
-            
-            // fade back in
-            mapImage.onload = () => {
-                gsap.to(mapImage, { opacity: 1, duration: 0.3 });
-            };
-            // Also fade in if error occurs so placeholder isn't stuck invisible
-            mapImage.onerror = function() {
-                this.onerror=null; 
-                this.src='data:image/svg+xml;utf8,<svg xmlns=\'http://www.w3.org/2000/svg\' viewBox=\'0 0 400 300\'><rect width=\'400\' height=\'300\' fill=\'%23222\'/><text x=\'50%\' y=\'50%\' fill=\'%23777\' font-family=\'monospace\' font-size=\'20\' text-anchor=\'middle\' alignment-baseline=\'middle\'>Missing Map Image</text></svg>';
-                gsap.to(mapImage, { opacity: 1, duration: 0.3 });
-            };
-        }});
+        gsap.to(mapImage, {
+            opacity: 0.5, duration: 0.2, onComplete: () => {
+                mapImage.src = `/maps/${mapFile}.png`;
+                // if it doesn't load as png, it will fall back to SVG handled in HTML onerror
+
+                // fade back in
+                mapImage.onload = () => {
+                    gsap.to(mapImage, { opacity: 1, duration: 0.3 });
+                };
+                // Also fade in if error occurs so placeholder isn't stuck invisible
+                mapImage.onerror = function () {
+                    this.onerror = null;
+                    this.src = 'data:image/svg+xml;utf8,<svg xmlns=\'http://www.w3.org/2000/svg\' viewBox=\'0 0 400 300\'><rect width=\'400\' height=\'300\' fill=\'%23222\'/><text x=\'50%\' y=\'50%\' fill=\'%23777\' font-family=\'monospace\' font-size=\'20\' text-anchor=\'middle\' alignment-baseline=\'middle\'>Missing Map Image</text></svg>';
+                    gsap.to(mapImage, { opacity: 1, duration: 0.3 });
+                };
+            }
+        });
     });
 }
 
@@ -511,7 +514,7 @@ document.querySelectorAll('.timer-item').forEach(timerEl => {
     const displayEl = timerEl.querySelector('.timer-display');
     const progressEl = timerEl.querySelector('.timer-progress');
     const duration = parseInt(timerEl.getAttribute('data-duration'));
-    
+
     let interval = null;
     let remaining = duration;
     let isRunning = false;
@@ -559,7 +562,7 @@ document.querySelectorAll('.timer-item').forEach(timerEl => {
 
     durationBtn.addEventListener('click', () => {
         if (typeof haptics !== 'undefined' && haptics) haptics.trigger('nudge');
-        
+
         gsap.fromTo(durationBtn, { scale: 0.9 }, { scale: 1, duration: 0.3, ease: "back.out(2)" });
 
         if (isRunning) {
@@ -570,23 +573,23 @@ document.querySelectorAll('.timer-item').forEach(timerEl => {
             durationBtn.textContent = '⏹';
             durationBtn.classList.remove('green');
             durationBtn.classList.add('red');
-            
+
             const startTime = Date.now();
-            
+
             interval = setInterval(() => {
                 const elapsed = (Date.now() - startTime) / 1000;
                 remaining = duration - elapsed;
-                
+
                 if (remaining <= 0) {
                     resetTimer();
-                    playBeep(1000, 0.2); 
+                    playBeep(1000, 0.2);
                     setTimeout(() => playBeep(1000, 0.4), 250);
                     return;
                 }
-                
+
                 displayEl.textContent = formatTime(remaining);
                 progressEl.style.width = `${(remaining / duration) * 100}%`;
-            }, 50); 
+            }, 50);
         }
     });
 });
