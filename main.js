@@ -89,6 +89,7 @@ gsap.to('.row-4', {
 // --- 2. Core Logic ---
 
 const ghosts = [
+    { name: "Aswang", speeds: [1.53] },
     { name: "Banshee", speeds: [1.7] },
     { name: "Dayan", speeds: [1.2, 1.7, 2.25], conditional: true },
     { name: "Demon", speeds: [1.7] },
@@ -97,6 +98,7 @@ const ghosts = [
     { name: "Goryo", speeds: [1.7] },
     { name: "Hantu", speeds: [1.4, 2.7], conditional: true },
     { name: "Jinn", speeds: [1.7, 2.5], conditional: true },
+    { name: "Kormos", speeds: [1.7, 2.21] },
     { name: "Mare", speeds: [1.7] },
     { name: "Moroi", speeds: [1.5, 2.25], conditional: true },
     { name: "Myling", speeds: [1.7] },
@@ -104,6 +106,7 @@ const ghosts = [
     { name: "Obambo", speeds: [1.45, 1.96], conditional: true },
     { name: "Oni", speeds: [1.7] },
     { name: "Onryo", speeds: [1.7] },
+    
     { name: "Phantom", speeds: [1.7, 2.5], conditional: true },
     { name: "Poltergeist", speeds: [1.7] },
     { name: "Revenant", speeds: [1.0, 3.0], conditional: true },
